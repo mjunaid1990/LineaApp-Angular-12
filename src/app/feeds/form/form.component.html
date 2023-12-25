@@ -1,0 +1,94 @@
+<div class="container">
+    <div class="feeds mx-auto">
+
+
+
+
+        <!-- add form -->
+
+        <div class="row">
+            <div class="col-12">
+                <div class="col-inner">
+                    <div class="insert-box">
+                        <div class="insert-box-inner">
+                            <h4>Post New Task</h4>
+                            <form [formGroup]="addForm" (ngSubmit)="create(addForm)">
+                                <div class="form-group">
+                                    <input type="text" class=" form-control" placeholder="Task Topic"
+                                        formControlName="title" />
+                                    <p class="help-block text-danger" *ngIf="isSubmitted && title.invalid">
+                                        Task Topic is required.
+                                    </p>
+                                </div>
+                                <div class="form-group">
+                                    <input type="date" class="date-picker form-control" placeholder="Completion Date"
+                                        formControlName="completion_date" />
+                                    <p class="help-block text-danger" *ngIf="isSubmitted && completion_date.invalid">
+                                        Completion Date is required.
+                                    </p>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" formControlName="status"
+                                        id="flexRadioDefault1" value="Active" checked>
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        Active
+                                    </label>
+                                </div>
+
+
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" formControlName="status"
+                                        id="flexRadioDefault1" value="Finished">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        Finished
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" formControlName="status"
+                                        id="flexRadioDefault1" value="Late">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        Late
+                                    </label>
+                                </div>
+
+
+                                <div class="form-group mt-2">
+                                    <ng-multiselect-dropdown name="assigned_id" [placeholder]="'Select Employee'"
+                                        [data]="dropdownList" formControlName="assigned_id"
+                                        [settings]="dropdownSettings" (onSelect)="onItemSelect($event)">
+                                    </ng-multiselect-dropdown>
+
+                                    <p class="help-block text-danger" *ngIf="isSubmitted && assigned_id.invalid">
+                                        Employee is required.
+                                    </p>
+
+                                </div>
+
+
+                                <div class="form-group">
+                                    <textarea formControlName="content" placeholder="Type here" rows="10"
+                                        class="form-control"></textarea>
+                                    <p class="help-block text-danger" *ngIf="isSubmitted && content.invalid">
+                                        This field is required.
+                                    </p>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-submit-post"
+                                        [disabled]="isSubmitted">Save</button>
+                                    <a [routerLink]="['/feeds']" class="btn btn-secondary ms-3">Go Back</a>
+                                </div>
+
+                                <div class="message"></div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>

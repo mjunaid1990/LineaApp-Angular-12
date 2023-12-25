@@ -1,0 +1,87 @@
+<div class="container mt-5">
+    <div class="row mb-3">
+        <div class="col-12">
+            <a type="button" class="btn btn-success btn-sm" data-bs-toggle="modal"
+                data-bs-target="#stickyModal">
+                <i class="fa fa-plus-circle"></i> Add Note
+            </a>
+        </div>
+    </div>
+
+    <div class="mt-3 example-boundary position-relative" *ngIf="notes && notes.length > 0" cdkDrop>
+        <div class="col-md-4" *ngFor="let note of notes; index as i;" cdkDragBoundary=".example-boundary" cdkDrag (cdkDragEnded)="dragEnded($event, note.id)"
+        
+        [ngStyle]="{'transform': note.position ? 'translate3d('+note.position.x+'px, '+note.position.y+'px, 0px)' : ''}"
+        
+
+        >
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">{{note.title}}</h4>
+                </div>
+                <div class="card-body">
+                    <p>{{note.description}}</p>
+                </div>
+                <div class="card-footer">
+                    <div class="text-end">
+                        <span (click)="deleteNote(note.id)" class="me-2"><i class="fa fa-trash text-danger"></i></span>
+                        <span (click)="editNote(note)"><i class="fa fa-pencil text-primary"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="stickyModal" tabindex="-1" aria-labelledby="stickyModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form [formGroup]="addForm" (ngSubmit)="create(addForm)">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="stickyModalLabel">Add Note</h5>
+                    <button type="button" #closebutton class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="control-label">Title</label>
+                        <input type="text" class=" form-control" placeholder="Title"
+                            formControlName="title" />
+                        <p class="help-block text-danger" *ngIf="isCatSubmitted && title.invalid">
+                            Title is required.
+                        </p>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Description</label>
+                        <textarea type="text" class=" form-control" placeholder="Description"
+                            formControlName="description" rows="5"></textarea>
+                        <p class="help-block text-danger" *ngIf="isCatSubmitted && description.invalid">
+                            Title is required.
+                        </p>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label class="control-label">Tag User</label>
+                        <ng-multiselect-dropdown name="assignee" [placeholder]="''"
+                            [data]="dropdownList" formControlName="assignee"
+                            [settings]="dropdownSettings">
+                        </ng-multiselect-dropdown>
+
+                        <p class="help-block text-danger" *ngIf="isSubmitted && assignee.invalid">
+                            Tag User is required.
+                        </p>
+
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="isSubmitted">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

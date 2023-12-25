@@ -1,0 +1,35 @@
+.feeds {
+    max-width: 650px;
+    margin-top: 50px;
+    .form-group {
+        &:hover,:focus {
+            box-shadow: none;
+            outline: none;
+        }
+        margin-bottom: 15px;
+        
+    }
+}
+.card-header-custom {
+    position: relative;
+    h5 {
+        font-size: 15px;
+        margin-bottom: 0;
+        cursor: pointer;
+    }
+    .dropdown {
+        position: absolute;
+        right: 15px;
+        top: 0;
+        .dropdown-toggle {
+            &::after {
+                content: unset;
+            }
+        }
+    }
+}
+
+.dropdown-btn {
+    color: red;
+}
+

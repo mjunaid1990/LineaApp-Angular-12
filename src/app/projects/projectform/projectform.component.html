@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="feeds mx-auto">
+
+
+
+
+        <!-- add form -->
+
+        <div class="row">
+            <div class="col-12">
+                <div class="col-inner">
+                    <div class="insert-box">
+                        <div class="insert-box-inner">
+                            <h4>Post New Task</h4>
+                            <form [formGroup]="addForm" (ngSubmit)="create(addForm)">
+                                <div class="form-group">
+                                    <input type="text" class=" form-control" placeholder="Task Topic"
+                                        formControlName="name" />
+                                    <p class="help-block text-danger" *ngIf="isSubmitted && name.invalid">
+                                        Task Topic is required.
+                                    </p>
+                                </div>
+
+                                <div class="form-group mt-2">
+                                    <ng-multiselect-dropdown name="assignee" [placeholder]="''"
+                                        [data]="dropdownList" formControlName="assignee"
+                                        [settings]="dropdownSettings" (onSelect)="onItemSelect($event)">
+                                    </ng-multiselect-dropdown>
+
+                                    <p class="help-block text-danger" *ngIf="isSubmitted && assignee.invalid">
+                                        This field is required.
+                                    </p>
+
+                                </div>
+
+
+                                
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-submit-post"
+                                        [disabled]="isSubmitted">Save</button>
+                                    <a [routerLink]="['/projects']" class="btn btn-secondary ms-3">Go Back</a>
+                                </div>
+
+                                <div class="message"></div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>

@@ -1,0 +1,12 @@
+.feeds {
+    max-width: 650px;
+    margin-top: 50px;
+    .form-group {
+        &:hover,:focus {
+            box-shadow: none;
+            outline: none;
+        }
+        margin-bottom: 15px;
+        
+    }
+}

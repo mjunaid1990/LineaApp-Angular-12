@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="feeds mx-auto">
+        
+
+        <!-- add button -->
+        <div class="row mb-3">
+            <div class="col-12">
+                <button class="btn btn-info" type="button" (click)="addNew()">Add Partner</button>
+            </div>
+        </div>
+
+        <!-- list -->
+        <div *ngIf="partners && partners.length > 0; then showPartnersList; else emptyPartner"></div>
+        <ng-template #showPartnersList>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card mb-3" *ngFor="let partner of partners; index as i;">
+                        
+                        <div class="card-body">
+
+                            <div class="card-header-custom">
+                                <h5 class="cursor-pointer" (click)="viewPartner(partner.id)">
+                                    <b><i class="fa fa-user"></i>
+                                        <span style="color:#050505;margin-left: 5px;">
+                                            {{partner.name}}
+                                        </span>
+                                        <span class="badge bg-secondary">Score: {{partner.result}}</span>
+                                    </b>
+                                    
+                                    <p class="mb-0 mt-3">Category: {{partner.category_name}}</p>
+                                </h5>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template #emptyPartner>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <p>No Partners yet.</p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </ng-template>
+        
+        
+
+    </div>
+</div>

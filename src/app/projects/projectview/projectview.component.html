@@ -1,0 +1,105 @@
+<div class="container">
+    <div class="feeds mx-auto">
+
+
+
+
+        <!-- add form -->
+
+        <div class="row card py-3">
+            <div class="col-12">
+                <div class="col-inner">
+                    <div class="insert-box">
+                        <div class="insert-box-inner">
+                            <h4>{{title}}</h4>
+                            <form [formGroup]="addForm" (ngSubmit)="create(addForm)">
+                                <div class="form-group">
+                                    <input type="text" class=" form-control" placeholder="Task"
+                                        formControlName="name" />
+                                    <p class="help-block text-danger" *ngIf="isSubmitted && name.invalid">
+                                        Task is required.
+                                    </p>
+                                </div>
+
+                                <div class="form-group mt-2">
+                                    <select name="frequency" class="form-control" formControlName="frequency">
+                                        <option value="">Select Frequencey...</option>
+                                        <option value="1">1 Day</option>
+                                        <option value="2">2 Days</option>
+                                        <option value="3">3 Days</option>
+                                        <option value="4">4 Days</option>
+                                        <option value="5">5 Days</option>
+                                        <option value="6">6 Days</option>
+                                        <option value="7">7 Days</option>
+                                        <option value="8">8 Days</option>
+                                        <option value="9">9 Days</option>
+                                        <option value="10">10 Days</option>
+                                        <option value="11">11 Days</option>
+                                        <option value="12">12 Days</option>
+                                        <option value="13">13 Days</option>
+                                        <option value="14">14 Days</option>
+                                        <option value="15">15 Days</option>
+                                        <option value="16">16 Days</option>
+                                        <option value="17">17 Days</option>
+                                        <option value="18">18 Days</option>
+                                        <option value="19">19 Days</option>
+                                        <option value="20">20 Days</option>
+                                        <option value="21">21 Days</option>
+                                        <option value="22">22 Days</option>
+                                        <option value="23">23 Days</option>
+                                        <option value="24">24 Days</option>
+                                        <option value="25">25 Days</option>
+                                        <option value="26">26 Days</option>
+                                        <option value="27">27 Days</option>
+                                        <option value="28">28 Days</option>
+                                        <option value="29">29 Days</option>
+                                        <option value="30">30 Days</option>
+                                    </select>
+
+                                    <p class="help-block text-danger" *ngIf="isSubmitted && frequency.invalid">
+                                        Frequency is required.
+                                    </p>
+
+                                    
+
+                                </div>
+
+                                <div class="tasks-list my-3" *ngIf="project.tasks && project.tasks.length > 0">
+                                    <div class="d-flex justify-content-between mb-2" *ngFor="let task of project.tasks; index as i;">
+                                        <div class="name">
+                                            {{task.name}}
+                                        </div>
+                                        <div class="actions">
+                                            <div class="d-flex align-item-center justify-content-center">
+                                                <p class="mb-0 me-2"><input type="checkbox" [checked]="task.user_checked" (click)="userChecked(task.id)" /></p>
+                                                <p class="mb-0 me-2"><input type="checkbox" [checked]="task.admin_checked" [disabled]="user.type==0" (click)="adminChecked(task.id)" /></p>
+                                                <p class="mb-0 me-2" (click)="editTask(task.id)"><i class="fa fa-pencil"></i></p>
+                                                <p class="mb-0" (click)="deleteTask(task.id)"><i class="fa fa-times"></i></p>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+
+                                
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-submit-post"
+                                        [disabled]="isSubmitted">Save</button>
+                                    <a [routerLink]="['/projects']" class="btn btn-secondary ms-3">Go Back</a>
+                                </div>
+
+                                <div class="message"></div>
+
+                                
+
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>

@@ -1,0 +1,82 @@
+<div class="container">
+    <div class="feeds mx-auto">
+        
+
+        <!-- add button -->
+        <div class="row mb-3" *ngIf="!isAdd">
+            <div class="col-12">
+                <button class="btn btn-info" type="button" (click)="addNew()">Add Project</button>
+            </div>
+        </div>
+
+        <!-- list -->
+        <div *ngIf="projects && projects.length > 0; then showProjectsList; else emptyProject"></div>
+        <ng-template #showProjectsList>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card mb-3" *ngFor="let item of projects; index as i;">
+                        
+                        <div class="card-body">
+
+                            <div class="card-header-custom">
+                                <h5 class="cursor-pointer">
+                                    <b (click)="viewProject(item.id)"><i class="fa fa-tasks"></i>
+                                        <span style="color:#050505;margin-left: 5px;">
+                                            {{item.name}}
+                                        </span>
+                                    </b>
+                                </h5>
+                                <div class="dropdown">
+                                    <a  href="javascript:void(0);" (click)="expandRow(item)" >
+                                        <i class="fa" [ngClass]="(item.expand)?'fa-chevron-down':'fa-chevron-right'"></i>
+                                    </a>
+                                    <a *ngIf="canEdit()" href="javascript:void(0);" class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa fa-ellipsis-v"></i>
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        <li><a href="javascript:void(0);" class="dropdown-item change-status" (click)="editProject(item.id)">Edit</a></li>
+                                        <li><a href="javascript:void(0);" class="dropdown-item change-status" (click)="deleteProject(item.id)">Delete</a></li>
+                                    </ul>
+                                  </div>
+                            </div>
+
+                            <div class="project-content mt-3" *ngIf="item.expand">
+
+                                <div class="tasks-list mt-4 mb-3" *ngIf="item.tasks && item.tasks.length > 0">
+                                    <div class="d-flex justify-content-between mb-2" *ngFor="let task of item.tasks; index as i;">
+                                        <div class="name">
+                                            {{task.name}}
+                                        </div>
+                                        <div class="actions">
+                                            <div class="d-flex align-item-center justify-content-center">
+                                                <p class="mb-0 me-2"><input type="checkbox" [checked]="task.user_checked" (click)="userChecked(task.id)" /></p>
+                                                <p class="mb-0 me-2"><input type="checkbox" [checked]="task.admin_checked" [disabled]="user.type==0" (click)="adminChecked(task.id)" /></p>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template #emptyProject>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <p>No projects yet.</p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </ng-template>
+        
+        
+
+    </div>
+</div>

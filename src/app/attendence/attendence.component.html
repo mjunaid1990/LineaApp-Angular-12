@@ -1,0 +1,76 @@
+<div class="container">
+    <div class="feeds mx-auto">
+        
+
+        <!-- add button -->
+        <div class="row my-3">
+            <div class="col-12">
+                <h4>Attendence List</h4>
+            </div>
+        </div>
+
+        <!-- list -->
+        <div *ngIf="users && users.length > 0; then showList; else emptyList"></div>
+        <ng-template #showList>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card mb-3" *ngFor="let user of users;">
+                        
+                        <div class="card-body">
+
+                            <div class="card-header-custom">
+                                <h5 class="cursor-pointer">
+                                    <span style="color:#050505;">
+                                        {{user.firstname}} {{user.lastname}}
+                                    </span>
+                                </h5>
+                                <div class="userstatus" *ngIf="user.last_status">
+                                    <span class="badge bg-info">{{user.last_status}}</span>
+                                </div>
+                                <div class="dropdown" *ngIf="canEdit(user.id)">
+                                    <a href="javascript:void(0);" class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa fa-ellipsis-v"></i>
+                                    </a>
+                                    
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        <li><a href="javascript:void(0);" class="dropdown-item change-status" (click)="changeStatus(user.id, 'Check in', user.attendence)">Check In</a></li>
+                                        <li><a href="javascript:void(0);" class="dropdown-item change-status" (click)="changeStatus(user.id, 'Check out', user.attendence.id)" *ngIf="user.attendence">Check Out</a></li>
+                                        <li><a href="javascript:void(0);" class="dropdown-item change-status" (click)="changeStatus(user.id, 'Break', user.attendence.id)" *ngIf="user.attendence">Break</a></li>
+                                        <li><a href="javascript:void(0);" class="dropdown-item change-status" (click)="changeStatus(user.id, 'Break return', user.attendence.id)" *ngIf="user.attendence">Break Return</a></li>
+                                        <li><a href="javascript:void(0);" class="dropdown-item change-status" (click)="changeStatus(user.id, 'Lunch', user.attendence.id)" *ngIf="user.attendence">Lunch</a></li>
+                                        <li><a href="javascript:void(0);" class="dropdown-item change-status" (click)="changeStatus(user.id, 'Lunch return', user.attendence.id)" *ngIf="user.attendence">Lunch Return</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- <div class="attendence-list mt-3" *ngIf="user.list">
+                                <ul>
+                                    <li *ngFor="let attend of user.list; index as i;">
+                                        <span class="type">{{attend.type}}</span>
+                                        <span class="time">{{attend.check_time}}</span>
+                                    </li>
+                                </ul>
+                            </div> -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template #emptyList>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <p>No users yet.</p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </ng-template>
+        
+        
+
+    </div>
+</div>

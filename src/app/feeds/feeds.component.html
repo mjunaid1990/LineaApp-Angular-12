@@ -1,0 +1,80 @@
+<div class="container">
+    <div class="feeds mx-auto">
+        
+
+        <!-- add button -->
+        <div class="row mb-3" *ngIf="!isAdd">
+            <div class="col-12">
+                <button class="btn btn-info" type="button" (click)="addNew()">Add Feed</button>
+            </div>
+        </div>
+
+        <!-- list -->
+        <div *ngIf="feeds && feeds.length > 0; then showFeedsList; else emptyFeed"></div>
+        <ng-template #showFeedsList>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card mb-3" *ngFor="let item of feeds; index as i;">
+                        
+                        <div class="card-body">
+
+                            <div class="card-header-custom">
+                                <h5 class="cursor-pointer" (click)="viewFeed(item.id)">
+                                    <b><i class="fa fa-tasks"></i>
+                                        <span style="color:#050505;margin-left: 5px;">
+                                            {{item.title}}
+                                        </span>
+                                    </b>
+                                    <span style="color:#65676b"> tagged with
+                                        <b>
+                                            <span style="color:#050505;">@ {{item.name}}</span>
+                                        </b>
+                                    </span>
+                                    <span class="badge bg-primary ms-2" *ngIf="item.status == 'Active'">{{item.status}}</span>
+                                    <span class="badge bg-success ms-2" *ngIf="item.status == 'Finished'">{{item.status}}</span>
+                                    <span class="badge bg-danger ms-2" *ngIf="item.status == 'Late'">{{item.status}}</span>
+                                    <p class="mb-0">Completion Date: {{item.completion_date}}</p>
+                                </h5>
+                                <div class="dropdown" *ngIf="canEdit(item.assigned_id, item.user_id)">
+                                    <a href="javascript:void(0);" class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa fa-ellipsis-v"></i>
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        <li><a href="javascript:void(0);" class="dropdown-item change-status" (click)="changeStatus(item.id, 'Active')" *ngIf="item.status != 'Active'">Active</a></li>
+                                        <li><a href="javascript:void(0);" class="dropdown-item change-status" (click)="changeStatus(item.id, 'Finished')" *ngIf="item.status != 'Finished'">Finished</a></li>
+                                        <li><a href="javascript:void(0);" class="dropdown-item change-status" (click)="changeStatus(item.id, 'Late')" *ngIf="item.status != 'Late'">Late</a></li>
+                                        <li><a href="javascript:void(0);" class="dropdown-item change-status" (click)="editFeed(item.id)">Edit</a></li>
+                                        <li><a href="javascript:void(0);" class="dropdown-item change-status" (click)="deleteFeed(item.id)">Delete</a></li>
+                                    </ul>
+                                  </div>
+                            </div>
+
+                            <p class="mb-2 text-end">Created On: <b>{{item.date }}</b></p>
+                            <p>{{item.content}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+
+        </ng-template>
+        <ng-template #emptyFeed>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <p>No feeds yet.</p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </ng-template>
+        
+
+        
+        
+
+    </div>
+</div>

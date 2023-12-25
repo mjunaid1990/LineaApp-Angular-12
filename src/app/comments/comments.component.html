@@ -1,0 +1,62 @@
+<div class="comments-wrap">
+
+    <h4>Discussion</h4>
+
+
+    <div class="comments-inner-wrap">
+
+        <div class="comment-thread" *ngIf="comments && comments.length > 0">
+            <div class="comment" *ngFor="let comment of comments; index as i;">
+                <a href="javascript:void(0);" class="comment-border-link"></a>
+
+                <div class="summary">
+                    <div class="comment-heading">
+                        <div class="comment-info">
+                            <h5 class="comment-author">{{comment.user}}</h5>
+                            <p class="m-0">
+                                {{comment.timeago}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="comment-body">
+                    <p>
+                        {{comment.content}}
+                    </p>
+                    <button type="button" class="btn btn-reply btn-sm" (click)="reply(comment.id)"><i class="fa fa-reply"></i>Reply</button>
+                </div>
+
+                <div class="replies" *ngIf="comment.replies && comment.replies.length > 0">
+                    <reply-comments [comments]="comment.replies"  (replyEvent)="childReply($event)"></reply-comments>
+                </div>
+            </div>
+        </div>
+
+        <div class="" *ngIf="!comments">
+            <p>No comments found</p>
+
+            <hr />
+
+        </div>
+
+
+        <div class="comment-add-box mt-4">
+            <form [formGroup]="addForm" (ngSubmit)="create(addForm)">
+
+                <div class="form-group">
+                    <textarea type="text" class=" form-control" placeholder="Type here..."
+                        formControlName="content" #contentfield></textarea>
+                    <p class="help-block text-danger" *ngIf="isSubmitted && content.invalid">
+                        Content is required.
+                    </p>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-submit-post" [disabled]="isSubmitted">Save</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</div>

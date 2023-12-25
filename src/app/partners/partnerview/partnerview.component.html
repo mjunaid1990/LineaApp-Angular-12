@@ -1,0 +1,89 @@
+<div class="container">
+    <div class="feeds mx-auto">
+        
+
+        <!-- add button -->
+        <div class="row mb-3">
+            <div class="col-12">
+                <button class="btn btn-secondary" type="button" (click)="goBack()"><i class="fa fa-arrow-left"></i></button>
+            </div>
+        </div>
+
+        <!-- list -->
+        <div class="row" *ngIf="partner">
+            <div class="col-12">
+                <div class="card mb-3">
+                    
+                    <div class="card-body">
+
+                        <div class="card-header-custom">
+                            <h5 class="cursor-pointer">
+                                <b><i class="fa fa-user"></i>
+                                    <span style="color:#050505;margin-left: 5px;">
+                                        {{partner.name}}
+                                    </span>
+                                    <span class="badge bg-secondary">Score: {{partner.result}}</span>
+                                </b>
+                                
+                                <p class="mb-0 mt-3">Category: {{partner.category_name}}</p>
+                            </h5>
+                            
+                        </div>
+
+                        <div>
+                            <label>REPUTATION:</label>
+                            <p class="mb-0">{{partner.reputation}}</p>
+                        </div>
+
+                        <div>
+                            <label>ACTIVE DURATION:</label>
+                            <p class="mb-0">{{partner.active_duration}}</p>
+                        </div>
+
+                        <div>
+                            <label>TRUSTABILITY:</label>
+                            <p class="mb-0">{{partner.trustability}}</p>
+                        </div>
+
+                        <div>
+                            <label>FULFILLMENT OF COMMITMENTS:</label>
+                            <p class="mb-0">{{partner.fulfillment_of_commitments}}</p>
+                        </div>
+
+                        <div>
+                            <label>SERVICE ON TIME:</label>
+                            <p class="mb-0">{{partner.service_on_time}}</p>
+                        </div>
+
+                        <div>
+                            <label>RISK OF ISSUES ARISING:</label>
+                            <p class="mb-0">{{partner.risk_of_issues_arising}}</p>
+                        </div>
+
+                        <div>
+                            <label>SERVICE AS DESCRIBED:</label>
+                            <p class="mb-0">{{partner.service_as_described}}</p>
+                        </div>
+
+                        <div>
+                            <label>LEVEL OF CUSTOMER CARE:</label>
+                            <p class="mb-0">{{partner.level_of_customer_care}}</p>
+                        </div>
+
+                        <div>
+                            <label>STAFF ATTITUDE:</label>
+                            <p class="mb-0">{{partner.staff_attitude}}</p>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div *ngIf="postID">
+            <app-comments [postid]="postID"></app-comments>
+        </div>
+
+    </div>
+</div>

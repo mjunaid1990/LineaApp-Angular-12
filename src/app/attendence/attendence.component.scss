@@ -1,0 +1,44 @@
+.card-header-custom {
+    position: relative;
+    h5 {
+        font-size: 15px;
+        margin-bottom: 0;
+        cursor: pointer;
+    }
+    .dropdown {
+        position: absolute;
+        right: 15px;
+        top: 0;
+        .dropdown-toggle {
+            &::after {
+                content: unset;
+            }
+        }
+    }
+}
+
+.dropdown-btn {
+    color: red;
+}
+.attendence-list {
+
+    ul {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        li {
+            margin-bottom: 5px;
+            font-size: 13px;
+            .type {
+                font-weight: 500;
+                margin-right: 10px;
+                display: block;
+            }
+        }
+    }
+}
+.userstatus {
+    position: absolute;
+    right: 30px;
+    top: 0;
+}

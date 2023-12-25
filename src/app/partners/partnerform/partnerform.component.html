@@ -1,0 +1,182 @@
+<div class="container">
+    <div class="feeds mx-auto">
+
+
+
+
+        <!-- add form -->
+
+        <div class="row">
+            <div class="col-12">
+                <div class="col-inner">
+                    <div class="insert-box">
+                        <div class="insert-box-inner">
+                            <h4>Add A Partner</h4>
+                            <form [formGroup]="addForm" (ngSubmit)="create(addForm)">
+                                <div class="form-group">
+                                    <input type="text" class=" form-control" placeholder="Partner Name"
+                                        formControlName="name" />
+                                    <p class="help-block text-danger" *ngIf="isSubmitted && name.invalid">
+                                        Name is required.
+                                    </p>
+                                </div>
+
+                                <div class="form-group">
+                                    <select class="form-control" formControlName="category_id">
+                                        <option value="">Select category</option>
+                                        <option *ngFor="let category of categories; index as i;" [value]="category.id">
+                                            {{category.name}}</option>
+                                    </select>
+                                    <p class="help-block text-danger" *ngIf="isSubmitted && category.invalid">
+                                        Category is required.
+                                    </p>
+                                </div>
+                                <div class="form-group">
+
+
+                                    <a type="button" class="btn btn-success btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#categoryModal">
+                                        <i class="fa fa-plus-circle"></i> Add Category
+                                    </a>
+
+                                </div>
+
+                                <hr />
+
+                                <div class="form-group">
+                                    <p>
+                                        <b>RATE PARTNER</b>
+                                        (Note: Values must be less then or equal to 10)
+                                    </p>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label class="control-label">Reputation</label>
+                                    <input type="number" class=" form-control"
+                                        formControlName="reputation" min="1" max="10" />
+                                    <p class="help-block text-danger" *ngIf="isSubmitted && reputation.invalid">
+                                        Reputation is required.
+                                    </p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label">Active Duration</label>
+                                    <input type="number" class=" form-control" min="1" max="10"
+                                        formControlName="active_duration" />
+                                    <p class="help-block text-danger" *ngIf="isSubmitted && active_duration.invalid">
+                                        Active Duration is required.
+                                    </p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label">Trustability</label>
+                                    <input type="number" class=" form-control" min="1" max="10"
+                                        formControlName="trustability" />
+                                    <p class="help-block text-danger" *ngIf="isSubmitted && trustability.invalid">
+                                        Trustability is required.
+                                    </p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label">Fulfillment of commitments</label>
+                                    <input type="number" class=" form-control" min="1" max="10"
+                                        formControlName="fulfillment_of_commitments" />
+                                    <p class="help-block text-danger" *ngIf="isSubmitted && fulfillment_of_commitments.invalid">
+                                        Fulfillment of commitments is required.
+                                    </p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label">Service on time</label>
+                                    <input type="number" class=" form-control" min="1" max="10"
+                                        formControlName="service_on_time" />
+                                    <p class="help-block text-danger" *ngIf="isSubmitted && service_on_time.invalid">
+                                        Service on time is required.
+                                    </p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label">Risk of issues arising</label>
+                                    <input type="number" class=" form-control" min="1" max="10"
+                                        formControlName="risk_of_issues_arising" />
+                                    <p class="help-block text-danger" *ngIf="isSubmitted && risk_of_issues_arising.invalid">
+                                        Risk of issues arising is required.
+                                    </p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label">Service as described</label>
+                                    <input type="number" class=" form-control" min="1" max="10"
+                                        formControlName="service_as_described" />
+                                    <p class="help-block text-danger" *ngIf="isSubmitted && service_as_described.invalid">
+                                        Service as described is required.
+                                    </p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label">Level of customer care</label>
+                                    <input type="number" class=" form-control" min="1" max="10"
+                                        formControlName="level_of_customer_care" />
+                                    <p class="help-block text-danger" *ngIf="isSubmitted && level_of_customer_care.invalid">
+                                        Level of customer care is required.
+                                    </p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label">Staff attitude</label>
+                                    <input type="number" class=" form-control" min="1" max="10"
+                                        formControlName="staff_attitude" />
+                                    <p class="help-block text-danger" *ngIf="isSubmitted && staff_attitude.invalid">
+                                        Staff attitude is required.
+                                    </p>
+                                </div>
+
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-submit-post"
+                                        [disabled]="isSubmitted">Save</button>
+                                    <a [routerLink]="['/partners']" class="btn btn-secondary ms-3">Go Back</a>
+                                </div>
+
+                                <div class="message"></div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="categoryModal" tabindex="-1" aria-labelledby="categoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form [formGroup]="categoryForm" (ngSubmit)="createCategory(categoryForm)">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="categoryModalLabel">Add Category</h5>
+                    <button type="button" #closebutton class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="text" class=" form-control" placeholder="Name"
+                            formControlName="name" />
+                        <p class="help-block text-danger" *ngIf="isCatSubmitted && category_name.invalid">
+                            Name is required.
+                        </p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="isCatSubmitted">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
